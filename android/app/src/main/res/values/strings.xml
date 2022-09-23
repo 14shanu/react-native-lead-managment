@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="account_type">pwcindia.com.login</string>
+	<string name="app_name">LeadManagement</string>
+	<string name="app_package">pwcindia.com</string>
+</resources>
