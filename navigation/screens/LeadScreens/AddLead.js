@@ -1,41 +1,126 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React, { useState } from "react";
-// import Header from './Header'
-import { Button, Icon } from "@rneui/themed";
+import {  StyleSheet} from "react-native";
+import React from "react";
 import { SafeAreaView } from "react-native";
 import { Dimensions } from "react-native";
-import { Input } from "@rneui/themed";
 import { ScrollView } from "react-native-gesture-handler";
-import { useForm, Controller } from "react-hook-form";
-import { CheckBox } from "@rneui/themed";
-import Header from "../../../components/utils/Header";
 import { net } from "react-native-force";
-import Toast from "react-native-toast-message";
-import CustomHeader from "../../../components/utils/CustomHeader";
+import Forms from "../../../components/FormComponents/Forms";
 
 const win = Dimensions.get("window");
 const AddLead = ({ navigation }) => {
 
-  const [isChecked, setChecked] = useState(false);
 
-  const {
-    control,
-    handleSubmit,
-    getValues,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      FirstName: "",
-      LastName:"",
-      Email: "",
-      MobilePhone: "",
-      IsConverted: false,
-      City:"",
-      Company:"",
-      Country:"",
+  const defaultValues = {
+    FirstName: "",
+    LastName:"",
+    Email: "",
+    MobilePhone: "",
+    IsConverted: false,
+    City:"",
+    Company:"",
+    Country:"",
+  }
+
+  const uploadButton =()=>{
+    
+    console.log('Uploaded.......');
+  }
+const addLeadTemplate ={
+  title:'Lead Info.',
+  mainContainerStyle:styles.formContainer,
+  submitButtonStyle:styles.SubmitBtn,
+  Fields:[
+    {
+      title:'First Name',
+      type:'text',
+      name:'FirstName',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
     },
-  });
+    {
+      title:'Last Name',
+      type:'text',
+      name:'LastName',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },
+    {
+      title:'Email',
+      type:'email',
+      name:'Email',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },{
+      title:'Mobile No.',
+      type:'numeric',
+      name:'MobilePhone',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },{
+      title:'City',
+      type:'text',
+      name:'City',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },{
+      title:'Company',
+      type:'text',
+      name:'Company',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },{
+      title:'Country',
+      type:'text',
+      name:'Country',
+      fieldProps:{
+        autoCapitalize:'none',
+        autoCorrect:false,
+        style:styles.inputStyle
+      }
+    },{
+      title:'Upload',
+      type:'button',
+      name:'upload',
+      onPressButton:uploadButton,
+      containerStyle:styles.UploadBtn,
+      fieldProps:{
+        buttonStyle:{
+          backgroundColor: 'green',
+          borderRadius: 20,
+        },
+        icon:{
+          name: 'camera',
+          type: 'font-awesome',
+          size: 15,
+          color: 'white',
+        }
+      }
+    },
+  ]
+
+}
+const validate =(watchValues , errroMethods)=>{
+  
+  console.log('watchValues',watchValues);
+}
 // -----------------------------onSubmit--------------------------------
   const onSubmit = async (data) => {
     console.log(data);
@@ -61,202 +146,8 @@ const AddLead = ({ navigation }) => {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
-        <CustomHeader title="Lead Info."/>
+<Forms template={addLeadTemplate} defaultValues={defaultValues} onSubmit={onSubmit} validate={validate} />
 
-
-        <View style={styles.formContainer}>
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                style={styles.inputStyle}
-                autoCapitalize="none"
-                autoCorrect={false}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="First Name"
-              />
-            )}
-            name="FirstName"
-          />
-          {errors.FirstName && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                style={styles.inputStyle}
-                autoCapitalize="none"
-                autoCorrect={false}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Last Name"
-              />
-            )}
-            name="LastName"
-          />
-          {errors.LastName && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-<Controller
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                style={styles.inputStyle}
-                autoCapitalize="none"
-                autoCorrect={false}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Company"
-              />
-            )}
-            name="Company"
-          />
-          {errors.Company && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.inputStyle}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Email"
-              />
-            )}
-            name="Email"
-          />
-          {errors.Email && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 10,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.inputStyle}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Mobile Phone"
-              />
-            )}
-            name="MobilePhone"
-          />
-          {errors.MobilePhone && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-          
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.inputStyle}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="City"
-              />
-            )}
-            name="City"
-          />
-          {errors.City && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-          <Controller
-            control={control}
-            rules={{
-              required: true,
-              maxLength: 100,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.inputStyle}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Country"
-              />
-            )}
-            name="Country"
-          />
-          {errors.Country && (
-            <Text style={styles.errorMessage}>This is required.</Text>
-          )}
-
-          {/* <CheckBox
-            value={isChecked}
-            center
-            
-            title="Lead is Convertable"
-            onValueChange={setChecked}
-            onPress={() => setChecked(!isChecked)}
-          /> */}
-
-          <View style={styles.UploadBtn}>
-            <Button title="Upload"  buttonStyle={{
-                backgroundColor: 'green',
-                borderRadius: 20,
-              }}
-              
-              icon={{
-                name: 'camera',
-                type: 'font-awesome',
-                size: 15,
-                color: 'white',
-              }}
-              />
-
-              
-          </View>
-
-          <View style={styles.SubmitBtn}>
-            <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-          </View>
-        </View>
       </SafeAreaView>
     </ScrollView>
   );

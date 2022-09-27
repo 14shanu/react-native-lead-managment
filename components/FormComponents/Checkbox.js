@@ -3,7 +3,7 @@ import { CheckBox,Icon } from "@rneui/themed";
 import { View,Text } from 'react-native'
 import { Controller } from 'react-hook-form'
 
-export default function Checkbox({control,validationProps,errors,name ,title}) {
+export default function Checkbox({control,validationProps,errors,name ,title,checkboxProps}) {
   return (
     <View key={title+name}>
     
@@ -11,7 +11,7 @@ export default function Checkbox({control,validationProps,errors,name ,title}) {
                 control={control}
                 rules={validationProps}
                 render={({field:{onChange,onBlur,value}})=>(
-                    <CheckBox  onPress={() => onChange(!value)} checked={value}  title={title}  
+                    <CheckBox {...checkboxProps} onPress={() => onChange(!value)} checked={value}  title={title}  
                     checkedIcon={
                         <Icon
                           name="radio-button-checked"

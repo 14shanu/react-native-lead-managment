@@ -1,7 +1,10 @@
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
-
+// Failed to resolve: project :libs:SalesforceReact
+// <a href="Unresolved dependencies">Show Details</a>
+// Affected Modules: <a href="openFile:C:/Users/asinghal080/Projects/LeadManagement_reactNative/android/app/build.gradle">app</a>
+// No matching configuration of project :libs:SalesforceReact was found. The consumer was configured to find an API of a component, preferably optimized for Android, as well as attribute 'com.android.build.api.attributes.BuildTypeAttr' with value 'debug', attribute 'com.android.build.api.attributes.AgpVersionAttr' with value '7.2.2' but:
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -143,6 +146,10 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        innerTest {
+        //...
+        matchingFallbacks = ['debug', 'release']
+    }
     }
 
     // applicationVariants are e.g. debug, release
@@ -167,8 +174,11 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':libs:SalesforceReact') // From node_modules
-
+//  implementation project(':SalesforceReact')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    // implementation 'com.android.build.api.attributes.BuildTypeAttr:debug'
+    // implementation 'com.android.build.api.attributes.AgpVersionAttr:7.2.2'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'

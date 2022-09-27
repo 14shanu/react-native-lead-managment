@@ -3,19 +3,12 @@ import React from 'react'
 import { Controller } from 'react-hook-form'
 import { View } from 'react-native'
 
-export default function CustomsButton({control,name,onPressButton ,title}) {
+export default function CustomsButton({control,name,onPressButton ,title,buttonProps},containerStyle) {
   return (
-    <View key={title+name}>
-
-    <Controller 
-    control={control}
-    render={({field:{onChange,onBlur,value}})=>(
-        <Button onBlur={onBlur} onPress= {onPressButton} title={title} 
+    <View key={title+name} >
+        <Button {...buttonProps}  onPress= {onPressButton} title={title} 
         />
         
-        )}
-        name ={name}
-        />
         </View>
         
   )

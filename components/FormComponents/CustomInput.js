@@ -3,7 +3,7 @@ import { View,Text } from 'react-native'
 import { Input } from "@rneui/themed";
 import { Controller } from 'react-hook-form'
 
-export default function CustomInput({control,validationProps,errors,name ,title,type}) {
+export default function CustomInput({control,validationProps,errors,name ,title,type ,inputProps}) {
   return (
     <View key={title+name}>
     
@@ -11,7 +11,7 @@ export default function CustomInput({control,validationProps,errors,name ,title,
         control={control}
         rules={validationProps}
         render={({field:{onChange,onBlur,value}})=>(
-            <Input 
+            <Input {...inputProps}
              onBlur={onBlur} onChangeText={value => onChange(value)} value={value} keyboardType={type} placeholder={title} 
             
             />

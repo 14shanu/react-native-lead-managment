@@ -9,11 +9,13 @@ import Home from './screens/HomeScreen';
 import AddLead from './screens/LeadScreens/AddLead';
 import ListOfLeads from './screens/LeadScreens/ListOfLeads';
 import LeadOverview from './screens/LeadScreens/LeadOverview';
+import LeadForm from '../components/SampleForm';
 
 //Screen names
 const homeName = "Home";
 const addLeadName = "AddLead";
 const leadListName = "LeadList";
+const SampleForm ="LeadForm"
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +36,7 @@ function LeadListStack() {
             <Stack.Screen name="List Of Leads" component={ListOfLeads} options={navOptionHandler}/>
             
             <Stack.Screen name="Lead Overview" component={LeadOverview} options={navOptionHandler}/>
+            <Stack.Screen name='Sample Form' component={LeadForm} options={navOptionHandler}/>
           
        
           </Stack.Navigator>
@@ -59,6 +62,8 @@ function MainContainer() {
 
             } else if (rn === leadListName) {
               iconName = focused ? 'list' : 'list-outline';
+            }else if (rn === SampleForm) {
+              iconName = focused ? 'add-circle' :'add-circle-outline'
             }
 
             // You can return any component that you like here!
@@ -70,6 +75,7 @@ function MainContainer() {
         <Tab.Screen name={homeName} component={Home} options={navOptionHandler}/>
         <Tab.Screen name={addLeadName} component={AddLead} options={navOptionHandler}/>
         <Tab.Screen name={leadListName} component={LeadListStack} options={navOptionHandler}/>
+        <Tab.Screen name={SampleForm} component={LeadForm} options={navOptionHandler}/>
 
       </Tab.Navigator>
     </NavigationContainer>
