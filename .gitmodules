@@ -1,3 +1,6 @@
 [submodule ".\\mobile_sdk\\SalesforceMobileSDK-Android\\"]
 	path = .\\mobile_sdk\\SalesforceMobileSDK-Android\\
 	url = https://github.com/forcedotcom/SalesforceMobileSDK-Android.git
+[submodule "SalesforceMobileSDK-Android"]
+	path = SalesforceMobileSDK-Android
+	url = https://github.com/forcedotcom/SalesforceMobileSDK-Android.git
